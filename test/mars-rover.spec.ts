@@ -8,4 +8,12 @@ describe("Mars Rover", () => {
 
     expect(result).toEqual(expectedResult);
   });
+
+  it("should rotate left", () => {
+    const expectedResult = "0,0,W";
+
+    const result = execute("L");
+
+    expect(result).toEqual(expectedResult);
+  })
 });
