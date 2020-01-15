@@ -43,9 +43,14 @@ class Location {
   toString() {
     return `${this.xCoordinate},${this.yCoordinate},${this.direction}`;
   }
+
+  moveForward() {
+    return new Location(this.xCoordinate, 1, this.direction);
+  }
 }
 
 enum Commands {
+  MOVE_FORWARD = "M",
   TURN_LEFT = "L",
   TURN_RIGHT = "R",
   EMPTY = ""
@@ -74,10 +79,14 @@ export function execute(commandString: string) {
   while(command !== Commands.EMPTY) {
     if (command === Commands.TURN_LEFT) {
       location = location.rotateLeft();
-
     }
+
     if (command === Commands.TURN_RIGHT) {
       location = location.rotateRight();
+    }
+
+    if (command === Commands.MOVE_FORWARD) {
+      location = location.moveForward();
     }
     command = instructions.takeOne();
   }
