@@ -52,12 +52,19 @@ class Location {
     return new Location(this.xCoordinate + 1, this.yCoordinate, this.direction);
   }
 
+  private moveWest() {
+    return new Location(this.xCoordinate - 1, this.yCoordinate, this.direction);
+  }
+
   moveForward() {
     if (this.direction === CompassDirection.NORTH) {
       return this.moveNorth();
     }
     if (this.direction === CompassDirection.EAST) {
       return this.moveEast();
+    }
+    if(this.direction === CompassDirection.WEST) {
+      return this.moveWest();
     }
     return this;
   }
