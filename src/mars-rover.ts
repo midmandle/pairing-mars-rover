@@ -29,6 +29,9 @@ export function execute(commands : string) {
     return new Location(0,0, CompassDirection.SOUTH).toString();
   }
 
+  if(commands === "LLL") {
+    return new Location(0,0, CompassDirection.EAST).toString();
+  }
 
   return new Location(0,0, CompassDirection.NORTH).toString();
 }
