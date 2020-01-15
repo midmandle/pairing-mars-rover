@@ -23,6 +23,8 @@ class Location {
       return new Location(this.xCoordinate, this.yCoordinate, CompassDirection.SOUTH);
     if (this.direction === CompassDirection.SOUTH)
       return new Location(this.xCoordinate, this.yCoordinate, CompassDirection.EAST);
+    if(this.direction === CompassDirection.EAST)
+      return new Location(this.xCoordinate, this.yCoordinate, CompassDirection.NORTH);
     return this;
   }
 
@@ -33,6 +35,8 @@ class Location {
       return new Location(this.xCoordinate, this.yCoordinate, CompassDirection.SOUTH);
     if(this.direction === CompassDirection.SOUTH)
       return new Location(this.xCoordinate, this.yCoordinate, CompassDirection.WEST);
+    if(this.direction === CompassDirection.WEST)
+      return new Location(this.xCoordinate, this.yCoordinate, CompassDirection.NORTH);
     return this;
   }
 
@@ -41,37 +45,34 @@ class Location {
   }
 }
 
-export function execute(commands: string) {
+class RoverCommands {
+  private commands: string;
+
+  constructor(commandString: string) {
+    this.commands = commandString;
+  }
+
+  takeOne() {
+    const command = this.commands.charAt(0);
+    this.commands = this.commands.slice(1);
+    return command;
+  }
+}
+
+export function execute(commandString: string) {
+  let commands = new RoverCommands(commandString);
   let location = new Location(0, 0, CompassDirection.NORTH);
 
-  if (commands === "L") {
-    location = location.rotateLeft();
-  }
+  let command = commands.takeOne();
+  while(command !== "") {
+    if (command === "L") {
+      location = location.rotateLeft();
+    }
 
-  if (commands === "LL") {
-    location = location.rotateLeft();
-    location = location.rotateLeft();
-  }
-
-  if (commands === "LLL") {
-    location = location.rotateLeft();
-    location = location.rotateLeft();
-    location = location.rotateLeft();
-  }
-
-  if (commands === "R") {
-    location = location.rotateRight();
-  }
-
-  if (commands === "RR") {
-    location = location.rotateRight();
-    location = location.rotateRight();
-  }
-
-  if (commands === "RRR") {
-    location = location.rotateRight();
-    location = location.rotateRight();
-    location = location.rotateRight();
+    if (command === "R") {
+      location = location.rotateRight();
+    }
+    command = commands.takeOne();
   }
 
   return location.toString();
