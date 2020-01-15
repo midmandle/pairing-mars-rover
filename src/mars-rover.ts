@@ -21,6 +21,8 @@ class Location {
 }
 
 export function execute(commands : string) {
+  let location = new Location(0,0, CompassDirection.NORTH).toString();
+
   if(commands === "L") {
     return new Location(0,0, CompassDirection.WEST).toString();
   }
@@ -33,5 +35,5 @@ export function execute(commands : string) {
     return new Location(0,0, CompassDirection.EAST).toString();
   }
 
-  return new Location(0,0, CompassDirection.NORTH).toString();
+  return location;
 }
