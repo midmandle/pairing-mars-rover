@@ -45,34 +45,41 @@ class Location {
   }
 }
 
-class RoverCommands {
-  private commands: string;
+enum Commands {
+  TURN_LEFT = "L",
+  TURN_RIGHT = "R",
+  EMPTY = ""
+}
+
+class RoverInstructions {
+  private instructions: string;
 
   constructor(commandString: string) {
-    this.commands = commandString;
+    this.instructions = commandString;
   }
 
   takeOne() {
-    const command = this.commands.charAt(0);
-    this.commands = this.commands.slice(1);
+    const command = this.instructions.charAt(0);
+    this.instructions = this.instructions.slice(1);
     return command;
   }
 }
 
 export function execute(commandString: string) {
-  let commands = new RoverCommands(commandString);
+  let instructions = new RoverInstructions(commandString);
   let location = new Location(0, 0, CompassDirection.NORTH);
 
-  let command = commands.takeOne();
-  while(command !== "") {
-    if (command === "L") {
-      location = location.rotateLeft();
-    }
+  let command = instructions.takeOne();
 
-    if (command === "R") {
+  while(command !== Commands.EMPTY) {
+    if (command === Commands.TURN_LEFT) {
+      location = location.rotateLeft();
+
+    }
+    if (command === Commands.TURN_RIGHT) {
       location = location.rotateRight();
     }
-    command = commands.takeOne();
+    command = instructions.takeOne();
   }
 
   return location.toString();
