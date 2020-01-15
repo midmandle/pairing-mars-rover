@@ -9,10 +9,21 @@ class Location {
   private xCoordinate: number;
   private yCoordinate: number;
   private direction: CompassDirection;
+
   constructor(x: number, y: number, direction: CompassDirection) {
     this.xCoordinate = x;
     this.yCoordinate = y;
     this.direction = direction;
+  }
+
+  rotateLeft() {
+    if (this.direction === CompassDirection.NORTH)
+      return new Location(this.xCoordinate, this.yCoordinate, CompassDirection.WEST);
+    if (this.direction === CompassDirection.WEST)
+      return new Location(this.xCoordinate, this.yCoordinate, CompassDirection.SOUTH);
+    if (this.direction === CompassDirection.SOUTH)
+      return new Location(this.xCoordinate, this.yCoordinate, CompassDirection.EAST);
+    return this;
   }
 
   toString() {
@@ -20,20 +31,23 @@ class Location {
   }
 }
 
-export function execute(commands : string) {
-  let location = new Location(0,0, CompassDirection.NORTH).toString();
+export function execute(commands: string) {
+  let location = new Location(0, 0, CompassDirection.NORTH);
 
-  if(commands === "L") {
-    return new Location(0,0, CompassDirection.WEST).toString();
+  if (commands === "L") {
+    location = location.rotateLeft();
   }
 
-  if(commands === "LL") {
-    return new Location(0,0, CompassDirection.SOUTH).toString();
+  if (commands === "LL") {
+    location = location.rotateLeft();
+    location = location.rotateLeft();
   }
 
-  if(commands === "LLL") {
-    return new Location(0,0, CompassDirection.EAST).toString();
+  if (commands === "LLL") {
+    location = location.rotateLeft();
+    location = location.rotateLeft();
+    location = location.rotateLeft();
   }
 
-  return location;
+  return location.toString();
 }
