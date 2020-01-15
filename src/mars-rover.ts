@@ -23,8 +23,10 @@ class RoverInstructions {
 
 export class MarsRover {
   private location = new Location(0, 0, CompassDirection.NORTH);
+  private roverInstructions: RoverInstructions;
 
-  constructor() {
+  constructor(commandString: string = "") {
+    this.roverInstructions = new RoverInstructions(commandString);
   }
 
   executeCommand(command: string) {
@@ -41,11 +43,10 @@ export class MarsRover {
     }
   }
 
-  run(commandString: string) {
-    let instructions = new RoverInstructions(commandString);
-
-
+  run() {
+    let instructions = this.roverInstructions;
     let command: string;
+
     do {
       command = instructions.takeOne();
       this.executeCommand(command);
