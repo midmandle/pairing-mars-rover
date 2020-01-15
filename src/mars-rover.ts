@@ -26,12 +26,16 @@ class Location {
     return this;
   }
 
-  toString() {
-    return `${this.xCoordinate},${this.yCoordinate},${this.direction}`;
+  rotateRight() {
+    if(this.direction === CompassDirection.NORTH)
+      return new Location(this.xCoordinate, this.yCoordinate, CompassDirection.EAST);
+    if(this.direction === CompassDirection.EAST)
+      return new Location(this.xCoordinate, this.yCoordinate, CompassDirection.SOUTH);
+    return this;
   }
 
-  rotateRight() {
-    return new Location(this.xCoordinate, this.yCoordinate, CompassDirection.EAST);
+  toString() {
+    return `${this.xCoordinate},${this.yCoordinate},${this.direction}`;
   }
 }
 
@@ -54,6 +58,11 @@ export function execute(commands: string) {
   }
 
   if (commands === "R") {
+    location = location.rotateRight();
+  }
+
+  if (commands === "RR") {
+    location = location.rotateRight();
     location = location.rotateRight();
   }
 
