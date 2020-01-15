@@ -58,6 +58,12 @@ class Location {
     return new Location(this.xCoordinate - 1, this.yCoordinate, this.direction);
   }
 
+  private moveSouth() {
+    if(this.yCoordinate === 0)
+      return new Location(this.xCoordinate, 9, this.direction);
+    return new Location(this.xCoordinate, this.yCoordinate - 1, this.direction);
+  }
+
   moveForward() {
     if (this.direction === CompassDirection.NORTH) {
       return this.moveNorth();
@@ -79,10 +85,6 @@ class Location {
 
   toString() {
     return `${this.xCoordinate},${this.yCoordinate},${this.direction}`;
-  }
-
-  private moveSouth() {
-    return new Location(this.xCoordinate, this.yCoordinate - 1, this.direction);
   }
 }
 
