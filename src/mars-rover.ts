@@ -40,19 +40,23 @@ class Location {
     return this;
   }
 
-  toString() {
-    return `${this.xCoordinate},${this.yCoordinate},${this.direction}`;
+  private moveNorth() {
+    if (this.yCoordinate === 9)
+      return new Location(this.xCoordinate, 0, this.direction);
+    return new Location(this.xCoordinate, this.yCoordinate + 1, this.direction);
   }
 
   moveForward() {
     if (this.direction === CompassDirection.NORTH) {
-      if(this.yCoordinate === 9)
-        return new Location(this.xCoordinate, 0, this.direction);
-      return new Location(this.xCoordinate, this.yCoordinate+1, this.direction);
+      return this.moveNorth();
     }
     if (this.direction === CompassDirection.EAST)
       return new Location(this.xCoordinate+1, this.yCoordinate, this.direction);
     return this;
+  }
+
+  toString() {
+    return `${this.xCoordinate},${this.yCoordinate},${this.direction}`;
   }
 }
 
