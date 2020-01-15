@@ -1,11 +1,34 @@
+enum CompassDirection {
+  NORTH = "N",
+  EAST = "E",
+  SOUTH = "S",
+  WEST = "W"
+}
+
+class Location {
+  private xCoordinate: number;
+  private yCoordinate: number;
+  private direction: CompassDirection;
+  constructor(x: number, y: number, direction: CompassDirection) {
+    this.xCoordinate = x;
+    this.yCoordinate = y;
+    this.direction = direction;
+  }
+
+  toString() {
+    return `${this.xCoordinate},${this.yCoordinate},${this.direction}`;
+  }
+}
+
 export function execute(commands : string) {
   if(commands === "L") {
-    return "0,0,W";
+    return new Location(0,0, CompassDirection.WEST).toString();
   }
 
   if(commands === "LL") {
-    return "0,0,S";
+    return new Location(0,0, CompassDirection.SOUTH).toString();
   }
 
-  return "0,0,N";
+
+  return new Location(0,0, CompassDirection.NORTH).toString();
 }
