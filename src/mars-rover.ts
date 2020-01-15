@@ -29,6 +29,10 @@ class Location {
   toString() {
     return `${this.xCoordinate},${this.yCoordinate},${this.direction}`;
   }
+
+  rotateRight() {
+    return new Location(this.xCoordinate, this.yCoordinate, CompassDirection.EAST);
+  }
 }
 
 export function execute(commands: string) {
@@ -47,6 +51,10 @@ export function execute(commands: string) {
     location = location.rotateLeft();
     location = location.rotateLeft();
     location = location.rotateLeft();
+  }
+
+  if (commands === "R") {
+    location = location.rotateRight();
   }
 
   return location.toString();
