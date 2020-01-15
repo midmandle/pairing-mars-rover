@@ -62,17 +62,27 @@ class Location {
     if (this.direction === CompassDirection.NORTH) {
       return this.moveNorth();
     }
+
     if (this.direction === CompassDirection.EAST) {
       return this.moveEast();
     }
+
     if(this.direction === CompassDirection.WEST) {
       return this.moveWest();
+    }
+
+    if(this.direction === CompassDirection.SOUTH) {
+      return this.moveSouth();
     }
     return this;
   }
 
   toString() {
     return `${this.xCoordinate},${this.yCoordinate},${this.direction}`;
+  }
+
+  private moveSouth() {
+    return new Location(this.xCoordinate, this.yCoordinate - 1, this.direction);
   }
 }
 
