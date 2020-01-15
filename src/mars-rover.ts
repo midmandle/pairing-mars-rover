@@ -31,6 +31,8 @@ class Location {
       return new Location(this.xCoordinate, this.yCoordinate, CompassDirection.EAST);
     if(this.direction === CompassDirection.EAST)
       return new Location(this.xCoordinate, this.yCoordinate, CompassDirection.SOUTH);
+    if(this.direction === CompassDirection.SOUTH)
+      return new Location(this.xCoordinate, this.yCoordinate, CompassDirection.WEST);
     return this;
   }
 
@@ -62,6 +64,12 @@ export function execute(commands: string) {
   }
 
   if (commands === "RR") {
+    location = location.rotateRight();
+    location = location.rotateRight();
+  }
+
+  if (commands === "RRR") {
+    location = location.rotateRight();
     location = location.rotateRight();
     location = location.rotateRight();
   }
