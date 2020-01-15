@@ -53,6 +53,8 @@ class Location {
   }
 
   private moveWest() {
+    if(this.xCoordinate === 0)
+      return new Location(9, this.yCoordinate, this.direction);
     return new Location(this.xCoordinate - 1, this.yCoordinate, this.direction);
   }
 
