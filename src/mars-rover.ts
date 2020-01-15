@@ -22,35 +22,35 @@ class RoverInstructions {
 }
 
 export class MarsRover {
+  private location = new Location(0, 0, CompassDirection.NORTH);
+
   constructor() {
   }
 
-  executeCommand(command: string, location: Location) {
+  executeCommand(command: string) {
     if (command === Commands.TURN_LEFT) {
-      location = location.rotateLeft();
+      this.location = this.location.rotateLeft();
     }
 
     if (command === Commands.TURN_RIGHT) {
-      location = location.rotateRight();
+      this.location = this.location.rotateRight();
     }
 
     if (command === Commands.MOVE_FORWARD) {
-      location = location.moveForward();
+      this.location = this.location.moveForward();
     }
-    return location;
   }
 
   run(commandString: string) {
     let instructions = new RoverInstructions(commandString);
-    let location = new Location(0, 0, CompassDirection.NORTH);
 
     let command = instructions.takeOne();
 
     while(command !== Commands.EMPTY) {
-      location = this.executeCommand(command, location);
+      this.executeCommand(command);
       command = instructions.takeOne();
     }
 
-    return location.toString();
+    return this.location.toString();
   }
 }
