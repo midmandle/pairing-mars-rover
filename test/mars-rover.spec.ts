@@ -10,6 +10,7 @@ describe("Mars Rover", () => {
     {commands: "R", expectedResult: "0,0,E"},
     {commands: "RR", expectedResult: "0,0,S"},
     {commands: "RRR", expectedResult: "0,0,W"},
+    {commands: "RRRR", expectedResult: "0,0,N"},
   ].forEach((value => {
     it(`should execute "${value.commands}" and return "${value.expectedResult}"`, function () {
       const result = execute(value.commands);
