@@ -1,43 +1,17 @@
 import { execute } from "../src/mars-rover";
 
 describe("Mars Rover", () => {
-  it("should start at {0, 0} facing North", () => {
-    const expectedResult = "0,0,N";
+  [
+    {commands: "", expectedResult: "0,0,N"},
+    {commands: "L", expectedResult: "0,0,W"},
+    {commands: "LL", expectedResult: "0,0,S"},
+    {commands: "LLL", expectedResult: "0,0,E"},
+    {commands: "LLLL", expectedResult: "0,0,N"}
+  ].forEach((value => {
+    it(`should execute "${value.commands}" and return "${value.expectedResult}"`, function () {
+      const result = execute(value.commands);
 
-    const result = execute("");
-
-    expect(result).toEqual(expectedResult);
-  });
-
-  it("should rotate left", () => {
-    const expectedResult = "0,0,W";
-
-    const result = execute("L");
-
-    expect(result).toEqual(expectedResult);
-  });
-
-  it("should rotate left twice", () => {
-    const expectedResult = "0,0,S";
-
-    const result = execute("LL");
-
-    expect(result).toEqual(expectedResult);
-  });
-
-  it("should rotate left three times", () => {
-    const expectedResult = "0,0,E";
-
-    const result = execute("LLL");
-
-    expect(result).toEqual(expectedResult);
-  });
-
-  it("should rotate left full-circle", () => {
-    const expectedResult = "0,0,N";
-
-    const result = execute("LLLL");
-
-    expect(result).toEqual(expectedResult);
-  });
+      expect(result).toEqual(value.expectedResult);
+    });
+  }));
 });
