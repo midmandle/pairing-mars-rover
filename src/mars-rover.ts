@@ -44,12 +44,12 @@ export class MarsRover {
   run(commandString: string) {
     let instructions = new RoverInstructions(commandString);
 
-    let command = instructions.takeOne();
 
-    while(command !== Commands.EMPTY) {
-      this.executeCommand(command);
+    let command: string;
+    do {
       command = instructions.takeOne();
-    }
+      this.executeCommand(command);
+    } while(command !== Commands.EMPTY);
 
     return this.location.toString();
   }
