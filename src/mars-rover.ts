@@ -45,7 +45,7 @@ class Location {
   }
 
   moveForward() {
-    return new Location(this.xCoordinate, 1, this.direction);
+    return new Location(this.xCoordinate, this.yCoordinate+1, this.direction);
   }
 }
 
