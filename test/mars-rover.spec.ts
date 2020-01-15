@@ -1,6 +1,12 @@
-import { execute } from "../src/mars-rover";
+import {MarsRover} from "../src/mars-rover";
 
 describe("Mars Rover", () => {
+  let rover: MarsRover;
+
+  beforeEach(() => {
+    rover = new MarsRover();
+  });
+
   [
     {commands: "", expectedResult: "0,0,N"},
     {commands: "L", expectedResult: "0,0,W"},
@@ -21,7 +27,7 @@ describe("Mars Rover", () => {
     {commands: "LLM", expectedResult: "0,9,S"},
   ].forEach((value => {
     it(`should execute "${value.commands}" and return "${value.expectedResult}"`, function () {
-      const result = execute(value.commands);
+      const result = rover.run(value.commands);
 
       expect(result).toEqual(value.expectedResult);
     });
