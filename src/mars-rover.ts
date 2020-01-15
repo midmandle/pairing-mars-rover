@@ -45,8 +45,11 @@ class Location {
   }
 
   moveForward() {
-    if (this.direction === CompassDirection.NORTH)
+    if (this.direction === CompassDirection.NORTH) {
+      if(this.yCoordinate === 9)
+        return new Location(this.xCoordinate, 0, this.direction);
       return new Location(this.xCoordinate, this.yCoordinate+1, this.direction);
+    }
     if (this.direction === CompassDirection.EAST)
       return new Location(this.xCoordinate+1, this.yCoordinate, this.direction);
     return this;
