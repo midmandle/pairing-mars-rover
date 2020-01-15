@@ -46,14 +46,18 @@ class Location {
     return new Location(this.xCoordinate, this.yCoordinate + 1, this.direction);
   }
 
+  private moveEast() {
+    if (this.xCoordinate === 9)
+      return new Location(0, this.yCoordinate, this.direction);
+    return new Location(this.xCoordinate + 1, this.yCoordinate, this.direction);
+  }
+
   moveForward() {
     if (this.direction === CompassDirection.NORTH) {
       return this.moveNorth();
     }
     if (this.direction === CompassDirection.EAST) {
-      if (this.xCoordinate === 9)
-        return new Location(0, this.yCoordinate, this.direction);
-      return new Location(this.xCoordinate+1, this.yCoordinate, this.direction);
+      return this.moveEast();
     }
     return this;
   }
